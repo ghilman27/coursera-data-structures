@@ -13,12 +13,9 @@ class QueueWithMax():
     # O(n) [WORST]
     def enqueue(self, a):
         self.__queue.append(a)
-        if len(self.max) == 0:
-            self.max.append(a)
-        else:
-            while len(self.max) > 0 and self.max[-1] < a:
-                self.max.pop()
-            self.max.append(a)
+        while len(self.max) > 0 and self.max[-1] < a:
+            self.max.pop()
+        self.max.append(a)
     
     # O(1)
     def dequeue(self):
@@ -28,7 +25,7 @@ class QueueWithMax():
             self.max.popleft()
 
     # O(1)
-    def max(self):
+    def max_(self):
         assert(len(self.__queue))
         return self.max[0]
 
@@ -50,7 +47,7 @@ def max_sliding_window(sequence, m):
         if len(queue) < m:
             queue.enqueue(value)
         if len(queue) == m:
-            result.append(queue.max())
+            result.append(queue.max_())
             queue.dequeue()
     return result
 
